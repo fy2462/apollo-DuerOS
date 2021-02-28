@@ -60,6 +60,15 @@ android {
             zipAlignEnabled true
             shrinkResources false
             signingConfig signingConfigs.release
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        outputFileName = "DuerOS_Launcher_Mirror_Open_${defaultConfig.versionName}_Release" +
+                                ".apk"
+                    }
+                }
+            }
         }
 
         debug {
@@ -68,6 +77,15 @@ android {
             zipAlignEnabled true
             shrinkResources false
             signingConfig signingConfigs.debug
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        outputFileName = "DuerOS_Launcher_Mirror_Open_${defaultConfig.versionName}_Debug" +
+                                ".apk"
+                    }
+                }
+            }
         }
     }
 
@@ -118,27 +136,12 @@ android {
         }
     }
 
-    android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                if (variant.buildType.name.equals('release')) {
-                    def fileName = "DuerOS_Launcher_Mirror_Open_${defaultConfig.versionName}_Release" + ".apk"
-                    output.outputFile = new File(outputFile.parent, fileName)
-                } else if (variant.buildType.name.equals('debug')) {
-                    def fileName = "DuerOS_Launcher_Mirror_Open_${defaultConfig.versionName}_Debug" + ".apk"
-                    output.outputFile = new File(outputFile.parent, fileName)
-                }
-            }
-        }
-    }
-
 }
 
 dependencies {
-    compile fileTree(include: '*.jar', dir: 'libs')
-    compile 'com.android.support:recyclerview-v7:25.0.0'
-    compile project(':core')
+    implementation fileTree(include: '*.jar', dir: 'libs')
+    implementation 'com.android.support:recyclerview-v7:25.0.0'
+    implementation project(':core')
 
 }
 

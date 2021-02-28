@@ -64,6 +64,15 @@ android {
             zipAlignEnabled true
             shrinkResources false
             signingConfig signingConfigs.release
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        outputFileName = "DuerOS_Launcher_HU_PT_Open_${defaultConfig.versionName}_Release" +
+                                ".apk"
+                    }
+                }
+            }
         }
 
         debug {
@@ -72,6 +81,14 @@ android {
             zipAlignEnabled true
             shrinkResources false
             signingConfig signingConfigs.debug
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        outputFileName = "DuerOS_Launcher_HU_PT_Open_${defaultConfig.versionName}_Debug" + ".apk"
+                    }
+                }
+            }
         }
     }
     lintOptions {
@@ -105,28 +122,11 @@ android {
             include 'armeabi'
         }
     }
-
-    android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                if (variant.buildType.name == 'release') {
-                    def fileName = "DuerOS_Launcher_HU_PT_Open_${defaultConfig.versionName}_Release" +
-                            ".apk"
-                    output.outputFile = new File(outputFile.parent, fileName)
-                } else if (variant.buildType.name == 'debug') {
-                    def fileName = "DuerOS_Launcher_HU_PT_Open_${defaultConfig.versionName}_Debug" +
-                            ".apk"
-                    output.outputFile = new File(outputFile.parent, fileName)
-                }
-            }
-        }
-    }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':map-sdk')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':map-sdk')
 }
 
 def getParamManifest(param) {
@@ -146,10 +146,10 @@ def enableLoggerDebug(boolean flag) {
     println flag ? "LOG_LEVEL = Log.VERBOSE;" : "LOG_LEVEL = Log.ERROR;"
 }
 
-task openLog() << {
+task openLog() {
     enableLoggerDebug(true)
 }
 
-task closeLog() << {
+task closeLog() {
     enableLoggerDebug(false)
 }

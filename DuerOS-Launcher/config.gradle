@@ -19,11 +19,11 @@ project.ext {
 
     javaVersion = 7
     javaMaxHeapSize = '2G'
-    compileSdkVersion = 22
-    buildToolsVersion = "25.0.0"
+    compileSdkVersion = 28
+    buildToolsVersion = "30.0.3"
 
     minSdkVer = 16
-    targetSdkVer = 22
+    targetSdkVer = 28
 
     enableBuildNative = true
     enableAspectj = false
