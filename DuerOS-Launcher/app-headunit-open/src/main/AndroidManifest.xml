@@ -17,15 +17,17 @@
          *****************************************************************************/
           -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.baidu.che.codriverlauncher"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.baidu.che.codriverlauncher"
           android:versionCode="12"
           android:versionName="1.0.12">
 
 <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
 <uses-permission android:name="android.permission.WAKE_LOCK"/>
-<uses-permission android:name="android.permission.GET_TASKS"/>
-<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+<uses-permission android:name="android.permission.WRITE_SETTINGS"
+    tools:ignore="ProtectedPermissions" />
 <uses-permission android:name="android.permission.CALL_PHONE"/>
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 <application
         android:name=".LauncherApp"

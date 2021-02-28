@@ -133,13 +133,17 @@ android {
             include 'armeabi'
         }
     }
+    ndkVersion ndkVersion
+    dependenciesInfo {
+        includeInApk true
+        includeInBundle true
+    }
 
 }
 
 dependencies {
     implementation fileTree(include: '*.jar', dir: 'libs')
     implementation project(':map-sdk')
-    implementation project(':core')
 }
 
 def getParamManifest(param) {
