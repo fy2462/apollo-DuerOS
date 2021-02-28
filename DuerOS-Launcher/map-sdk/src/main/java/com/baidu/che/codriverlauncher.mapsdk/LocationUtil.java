@@ -26,7 +26,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.model.CoordUtil;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.inner.Point;
+import com.baidu.platform.comapi.basestruct.Point;
 
 import android.content.Context;
 
@@ -367,7 +367,6 @@ class LocationUtil implements BDLocationListener, INoProguard {
         }
     }
 
-    @Override
     public void onConnectHotSpotMessage(String arg0, int arg1) {
         LogUtil.d(TAG, "onConnectHotSpotMessage:arg0=" + arg0 + ";arg1=" + arg1);
 
