@@ -16,7 +16,7 @@ public class MusicCommandHandler implements ICmdHandler {
     public String handle(String cmd, String param, String data) {
         if (this.tool == null)
             return null;
-        if ("music.tool".equals(cmd))
+        if (CdMusicManager.MUSIC_TOOL.equals(cmd))
             if ("play.music".equals(param)) {
                 CdMusicManager.MusicModel musicModel = new Gson().fromJson(data, CdMusicManager.MusicModel.class);
                 this.tool.playMusic(musicModel);

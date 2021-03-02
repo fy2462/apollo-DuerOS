@@ -24,8 +24,8 @@ public class CdWechatManager implements INoProguard {
     }
 
     public void setWXTool(CdWechatManager.WechatTool tool) {
-        RequestManager.getInstance().sendRequest("wechat.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("wechat.tool", new WechatCommandHandler(tool));
+        RequestManager.getInstance().sendRequest(WECHAT_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(WECHAT_TOOL, new WechatCommandHandler(tool));
     }
 
     public interface WechatTool extends INoProguard {

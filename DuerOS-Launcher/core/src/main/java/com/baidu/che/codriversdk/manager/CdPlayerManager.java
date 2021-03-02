@@ -10,6 +10,10 @@ import com.baidu.che.codriversdk.RequestManager;
 import com.baidu.che.codriversdk.handler.PlayerHandler;
 
 public class CdPlayerManager implements INoProguard {
+
+    public static final String TAG = "CdPlayerManager";
+    public static final String PLAYER_TOOL = "player.tool";
+
     public CdPlayerManager() {
     }
 
@@ -22,12 +26,12 @@ public class CdPlayerManager implements INoProguard {
     }
 
     public void setPlayerTool(CdPlayerManager.PlayerTool tool) {
-        RequestManager.getInstance().sendRequest("player.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("player.tool", new PlayerHandler(tool));
+        RequestManager.getInstance().sendRequest(PLAYER_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(PLAYER_TOOL, new PlayerHandler(tool));
     }
 
     private void sendRequest(String param, String data) {
-        RequestManager.getInstance().sendRequest("player.tool", param, data);
+        RequestManager.getInstance().sendRequest(PLAYER_TOOL, param, data);
     }
 
     public void stopDefaultPlayer() {

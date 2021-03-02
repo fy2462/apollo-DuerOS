@@ -24,26 +24,26 @@ public class RequestManager implements INoProguard {
     private Context mContext;
     private ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
-            LogUtil.d("RequestManager", "onServiceConnected ComponentName=" + name.getPackageName());
+            LogUtil.d(TAG, "onServiceConnected ComponentName=" + name.getPackageName());
             ServiceBinder binder = (ServiceBinder)service;
             RequestManager.this.mLocalService = binder.getServiceBinder();
             if (RequestManager.this.mLocalService.isConnectedToRemote() && !RequestManager.this.mInitCompleted) {
                 if (RequestManager.this.mInitListener != null) {
-                    LogUtil.i("RequestManager", "onServiceConnected mInitListener != null call onConnectedToRemote");
+                    LogUtil.i(TAG, "onServiceConnected mInitListener != null call onConnectedToRemote");
                     RequestManager.this.mInitListener.onConnectedToRemote();
                 } else {
-                    LogUtil.e("RequestManager", "onServiceConnected mInitListener == null");
+                    LogUtil.e(TAG, "onServiceConnected mInitListener == null");
                 }
 
                 RequestManager.this.mInitCompleted = true;
             } else {
-                LogUtil.e("RequestManager", "onServiceConnected mLocalService.isConnectedToRemote() = " + RequestManager.this.mLocalService.isConnectedToRemote() + ", mInitCompleted = " + RequestManager.this.mInitCompleted);
+                LogUtil.e(TAG, "onServiceConnected mLocalService.isConnectedToRemote() = " + RequestManager.this.mLocalService.isConnectedToRemote() + ", mInitCompleted = " + RequestManager.this.mInitCompleted);
             }
 
         }
 
         public void onServiceDisconnected(ComponentName name) {
-            LogUtil.d("RequestManager", "onServiceDisconnected ComponentName=" + name.getPackageName());
+            LogUtil.d(TAG, "onServiceDisconnected ComponentName=" + name.getPackageName());
             RequestManager.this.mLocalService = null;
             Intent intent = new Intent(RequestManager.this.mContext, PlatformService.class);
             RequestManager.this.mContext.startService(intent);

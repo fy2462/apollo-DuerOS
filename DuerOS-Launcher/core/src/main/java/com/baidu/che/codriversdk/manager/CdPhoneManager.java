@@ -17,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CdPhoneManager implements INoProguard {
+
+    public static final String TAG = "CdPhoneManager";
     public static final String PHONE_TOOL = "phone.tool";
 
     public CdPhoneManager() {
@@ -31,8 +33,8 @@ public class CdPhoneManager implements INoProguard {
     }
 
     public void setPhoneTool(CdPhoneManager.PhoneTool tool) {
-        RequestManager.getInstance().sendRequest("phone.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("phone.tool", new PhoneCommandHandler(tool));
+        RequestManager.getInstance().sendRequest(PHONE_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(PHONE_TOOL, new PhoneCommandHandler(tool));
     }
 
     public void onNotifyPhoneStatus(CdPhoneManager.PhoneDownloadStatus status) {
@@ -40,7 +42,7 @@ public class CdPhoneManager implements INoProguard {
     }
 
     public void sendRequest(String param, String data) {
-        RequestManager.getInstance().sendRequest("phone.tool", param, data);
+        RequestManager.getInstance().sendRequest(PHONE_TOOL, param, data);
     }
 
     public void sendPhoneBookData(CdPhoneManager.PhoneContactList data) {
@@ -78,7 +80,7 @@ public class CdPhoneManager implements INoProguard {
 
         public boolean addContact(String name, String number) {
             if (TextUtils.isEmpty(number)) {
-                LogUtil.d("CdPhoneManager", "number is empty");
+                LogUtil.d(TAG, "number is empty");
                 return false;
             } else {
                 this.phoneDisplayName.add(name);

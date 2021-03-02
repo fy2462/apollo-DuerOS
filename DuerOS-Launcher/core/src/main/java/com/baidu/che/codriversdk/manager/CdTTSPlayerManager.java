@@ -7,10 +7,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CdTTSPlayerManager implements INoProguard {
+
+    public static final String TAG = "CdTTSPlayerManager";
+    public static final String TTS_TOOL = "tts.tool";
+
     private TTSPlayerHandler mTTSPlayHandler = new TTSPlayerHandler();
 
     public CdTTSPlayerManager() {
-        RequestManager.getInstance().addCommandHandler("tts.tool", this.mTTSPlayHandler);
+        RequestManager.getInstance().addCommandHandler(TTS_TOOL, this.mTTSPlayHandler);
     }
 
     public static CdTTSPlayerManager getInstance() {
@@ -19,7 +23,7 @@ public class CdTTSPlayerManager implements INoProguard {
 
     public void setTTSPlayerListener(CdTTSPlayerManager.TTSPlayerListener listener) {
         this.mTTSPlayHandler.setPlayerListener(listener);
-        RequestManager.getInstance().sendRequest("tts.tool", "set", (String)null);
+        RequestManager.getInstance().sendRequest(TTS_TOOL, "set", (String)null);
     }
 
     public void setTTSPlayStatusListener(CdTTSPlayerManager.TTSPlayStatusListener listener) {
@@ -28,11 +32,11 @@ public class CdTTSPlayerManager implements INoProguard {
 
     public void playAndShow(String text, CdTTSPlayerManager.PlayAndShowListener listener) {
         this.mTTSPlayHandler.setPlayerAndShowListener(listener);
-        RequestManager.getInstance().sendRequest("tts.tool", "play_and_show_with_cb", text);
+        RequestManager.getInstance().sendRequest(TTS_TOOL, "play_and_show_with_cb", text);
     }
 
     public void play(String text) {
-        RequestManager.getInstance().sendRequest("tts.tool", "play", text);
+        RequestManager.getInstance().sendRequest(TTS_TOOL, "play", text);
     }
 
     public void playWithUtteranceId(String text, String utteranceId) {
@@ -45,7 +49,7 @@ public class CdTTSPlayerManager implements INoProguard {
                 try {
                     sendData.put("id", utteranceId);
                     sendData.put("text", text);
-                    RequestManager.getInstance().sendRequest("tts.tool", "play_with_id", sendData.toString());
+                    RequestManager.getInstance().sendRequest(TTS_TOOL, "play_with_id", sendData.toString());
                 } catch (JSONException var5) {
                     var5.printStackTrace();
                 }
@@ -55,11 +59,11 @@ public class CdTTSPlayerManager implements INoProguard {
     }
 
     public void playAndShow(String text) {
-        RequestManager.getInstance().sendRequest("tts.tool", "play_and_show", text);
+        RequestManager.getInstance().sendRequest(TTS_TOOL, "play_and_show", text);
     }
 
     public void stop() {
-        RequestManager.getInstance().sendRequest("tts.tool", "stop", (String)null);
+        RequestManager.getInstance().sendRequest(TTS_TOOL, "stop", (String)null);
     }
 
     public void switchSpeak(CdTTSPlayerManager.SpeechType type) {
@@ -67,7 +71,7 @@ public class CdTTSPlayerManager implements INoProguard {
     }
 
     public void setAudioStreamType(int mType) {
-        RequestManager.getInstance().sendRequest("tts.tool", "set_stream_type", "" + mType);
+        RequestManager.getInstance().sendRequest(TTS_TOOL, "set_stream_type", "" + mType);
     }
 
     private void switchType(CdTTSPlayerManager.SpeechType type) {
@@ -86,7 +90,7 @@ public class CdTTSPlayerManager implements INoProguard {
             mType = "nomalfemale";
         }
 
-        RequestManager.getInstance().sendRequest("tts.tool", "switch", mType);
+        RequestManager.getInstance().sendRequest(TTS_TOOL, "switch", mType);
     }
 
     public static enum SpeechType implements INoProguard {

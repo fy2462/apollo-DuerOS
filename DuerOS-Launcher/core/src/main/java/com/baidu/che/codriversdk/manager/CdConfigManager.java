@@ -36,42 +36,42 @@ public class CdConfigManager implements INoProguard {
     }
 
     private void setConfigTool() {
-        RequestManager.getInstance().sendRequest("config.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("config.tool", new ConfigHandler());
+        RequestManager.getInstance().sendRequest(CONFIG_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(CONFIG_TOOL, new ConfigHandler());
     }
 
     public void setMusicType(CdConfigManager.MusicType musicType) {
-        RequestManager.getInstance().sendRequest("config.tool", "set_music_type", musicType.name());
+        RequestManager.getInstance().sendRequest(CONFIG_TOOL, "set_music_type", musicType.name());
     }
 
     private void setLogLevel(int level) {
-        RequestManager.getInstance().sendRequest("config.tool", "set_log_level", "" + level);
+        RequestManager.getInstance().sendRequest(CONFIG_TOOL, "set_log_level", "" + level);
     }
 
     public void setDisplayView(CdConfigManager.DisplayView view) {
         if (view == CdConfigManager.DisplayView.ACTIVITY) {
-            RequestManager.getInstance().sendRequest("config.tool", "set_display_view", "activity");
+            RequestManager.getInstance().sendRequest(CONFIG_TOOL, "set_display_view", "activity");
         } else {
-            RequestManager.getInstance().sendRequest("config.tool", "set_display_view", "dialog");
+            RequestManager.getInstance().sendRequest(CONFIG_TOOL, "set_display_view", "dialog");
         }
 
     }
 
     public void notifySystemSleep() {
         RequestManager.getInstance().setIsSystemSleep(true);
-        RequestManager.getInstance().sendRequest("config.tool", "notify_system_sleep", (String)null);
+        RequestManager.getInstance().sendRequest(CONFIG_TOOL, "notify_system_sleep", (String)null);
     }
 
     public void notifySystemWakeUp() {
         RequestManager.getInstance().setIsSystemSleep(false);
-        RequestManager.getInstance().sendRequest("config.tool", "notify_system_wakeup", (String)null);
+        RequestManager.getInstance().sendRequest(CONFIG_TOOL, "notify_system_wakeup", (String)null);
     }
 
     public String getDuerOSVersion() {
-        String codriverVersionName = this.getAppVersionName("com.baidu.che.codriver");
-        int launcherVersionCode = this.getAppVersionCode("com.baidu.che.codriverlauncher");
-        int naviVersionCode = this.getAppVersionCode("com.baidu.naviauto");
-        int radioVersionCode = this.getAppVersionCode("com.baidu.car.radio");
+        String codriverVersionName = this.getAppVersionName(PKG_NAME_CODRIVER);
+        int launcherVersionCode = this.getAppVersionCode(PKG_NAME_LAUNCHER);
+        int naviVersionCode = this.getAppVersionCode(PKG_NAME_NAVI);
+        int radioVersionCode = this.getAppVersionCode(PKG_NAME_RADIO);
         return codriverVersionName + "." + (launcherVersionCode + naviVersionCode + radioVersionCode);
     }
 

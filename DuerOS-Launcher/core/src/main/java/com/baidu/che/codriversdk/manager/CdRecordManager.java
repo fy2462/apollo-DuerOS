@@ -11,6 +11,7 @@ import com.baidu.che.codriversdk.handler.RecordHandler;
 
 public class CdRecordManager implements INoProguard {
     private static final String TAG = CdRecordManager.class.getSimpleName();
+    public static final String RECORD_TOOL = "record.tool";
 
     public CdRecordManager() {
     }
@@ -24,8 +25,8 @@ public class CdRecordManager implements INoProguard {
     }
 
     public void setRecordTool(CdRecordManager.RecordTool tool) {
-        RequestManager.getInstance().sendRequest("record.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("record.tool", new RecordHandler(tool));
+        RequestManager.getInstance().sendRequest(RECORD_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(RECORD_TOOL, new RecordHandler(tool));
     }
 
     public int feedAudioBuffer(byte[] micData, byte[] spkData) {
@@ -37,7 +38,7 @@ public class CdRecordManager implements INoProguard {
     }
 
     public void setRecordType(CdRecordManager.RecordType recordType) {
-        RequestManager.getInstance().sendRequest("record.tool", "record_type", "" + recordType.ordinal());
+        RequestManager.getInstance().sendRequest(RECORD_TOOL, "record_type", "" + recordType.ordinal());
     }
 
     public interface RecordTool extends INoProguard {

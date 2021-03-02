@@ -19,12 +19,12 @@ public class CdMediaManager implements INoProguard {
     }
 
     public void setMediaTool(CdMediaManager.MediaTool tool) {
-        RequestManager.getInstance().sendRequest("media.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("media.tool", new MediaCommandHandler(tool));
+        RequestManager.getInstance().sendRequest(MEDIA_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(MEDIA_TOOL, new MediaCommandHandler(tool));
     }
 
     public void sendMediaRequest(String param, String data) {
-        RequestManager.getInstance().sendRequest("media.tool", param, data);
+        RequestManager.getInstance().sendRequest(MEDIA_TOOL, param, data);
     }
 
     public interface MediaTool extends INoProguard {

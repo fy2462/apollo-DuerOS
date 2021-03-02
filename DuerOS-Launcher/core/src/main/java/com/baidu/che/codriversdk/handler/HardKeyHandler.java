@@ -3,9 +3,13 @@ package com.baidu.che.codriversdk.handler;
 import android.view.KeyEvent;
 import com.baidu.che.codriversdk.LogUtil;
 import com.baidu.che.codriversdk.RequestManager.ICmdHandler;
+import com.baidu.che.codriversdk.manager.CdHardKeyManager;
 import com.baidu.che.codriversdk.manager.CdHardKeyManager.HardKeyTool;
 
 public class HardKeyHandler implements ICmdHandler {
+
+    public static final String TAG = "HardKeyHandler";
+
     private HardKeyTool tool;
 
     public HardKeyHandler(HardKeyTool tool) {
@@ -13,10 +17,10 @@ public class HardKeyHandler implements ICmdHandler {
     }
 
     public String handle(String cmd, String param, String data) {
-        LogUtil.e("HardKeyHandler", "onReceiveCommand-cmdType:" + cmd + ";param:" + param);
+        LogUtil.e(TAG, "onReceiveCommand-cmdType:" + cmd + ";param:" + param);
         if (this.tool == null) {
             return null;
-        } else if (!"hardkey.tool".equals(cmd)) {
+        } else if (!CdHardKeyManager.HARDKEY_TOOL.equals(cmd)) {
             return null;
         } else if (param == null) {
             return null;

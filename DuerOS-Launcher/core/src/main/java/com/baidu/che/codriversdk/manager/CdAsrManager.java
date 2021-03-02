@@ -30,12 +30,12 @@ public class CdAsrManager implements INoProguard {
 
     public void setAsrTool(CdAsrManager.AsrTool tool) {
         this.mReceiveHandler.setAsrTool(tool);
-        RequestManager.getInstance().sendRequest("asr.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("asr.tool", this.mReceiveHandler);
+        RequestManager.getInstance().sendRequest(ASR_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(ASR_TOOL, this.mReceiveHandler);
     }
 
     public void sendRequest(String param, String data) {
-        RequestManager.getInstance().sendRequest("asr.tool", param, data);
+        RequestManager.getInstance().sendRequest(ASR_TOOL, param, data);
     }
 
     public void disableAsr() {
@@ -104,13 +104,13 @@ public class CdAsrManager implements INoProguard {
                 return false;
             }
 
-            LogUtil.d("CdAsrManager", "sendSceneCommand(): sceneCommand=" + obj.toString());
+            LogUtil.d(TAG, "sendSceneCommand(): sceneCommand=" + obj.toString());
             this.sendRequest("register_cmd", obj.toString());
             this.mCmdMap.put(sceneCommand.getId(), sceneCommand);
-            RequestManager.getInstance().addCommandHandler("asr.tool", this.mReceiveHandler);
+            RequestManager.getInstance().addCommandHandler(ASR_TOOL, this.mReceiveHandler);
             return true;
         } else {
-            LogUtil.d("CdAsrManager", "sendSceneCommand(): sceneCommand.getId())=" + sceneCommand.getId());
+            LogUtil.d(TAG, "sendSceneCommand(): sceneCommand.getId())=" + sceneCommand.getId());
             return false;
         }
     }
@@ -119,12 +119,12 @@ public class CdAsrManager implements INoProguard {
         if (!TextUtils.isEmpty(hashKey) && !TextUtils.isEmpty(cmdKey) && !TextUtils.isEmpty(cmdText)) {
             CdAsrManager.SceneCommand sceneCommand = (CdAsrManager.SceneCommand)this.mCmdMap.get(hashKey);
             if (sceneCommand == null) {
-                LogUtil.e("CdAsrManager", "--onCommand sceneCommand is null!!!----");
+                LogUtil.e(TAG, "--onCommand sceneCommand is null!!!----");
             } else {
                 sceneCommand.onCommand(cmdKey, cmdText);
             }
         } else {
-            LogUtil.e("CdAsrManager", "--onCommand param is null!!!----");
+            LogUtil.e(TAG, "--onCommand param is null!!!----");
         }
     }
 
@@ -159,7 +159,7 @@ public class CdAsrManager implements INoProguard {
                 var8.printStackTrace();
             }
 
-            LogUtil.e("CdAsrManager", "addCommand(): contentArray=" + this.contentArray.toString());
+            LogUtil.e(TAG, "addCommand(): contentArray=" + this.contentArray.toString());
             return this;
         }
 

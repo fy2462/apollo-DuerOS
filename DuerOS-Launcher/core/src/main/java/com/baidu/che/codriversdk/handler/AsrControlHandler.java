@@ -8,6 +8,9 @@ import org.json.JSONObject;
 import com.baidu.che.codriversdk.RequestManager.ICmdHandler;
 
 public class AsrControlHandler implements ICmdHandler  {
+
+    public static final String TAG = "AsrControlHandler";
+
     private AsrTool tool;
 
     public AsrControlHandler() {
@@ -20,7 +23,7 @@ public class AsrControlHandler implements ICmdHandler  {
     public String handle(String cmd, String param, String data) {
         if ("asr.tool".equals(cmd)) {
             if ("register_cmd".equals(param)) {
-                LogUtil.e("AsrControlHandler", "onCommand(): param=" + param + " data=" + data);
+                LogUtil.e(TAG, "onCommand(): param=" + param + " data=" + data);
 
                 try {
                     JSONObject dataObject = new JSONObject(data);
@@ -30,10 +33,10 @@ public class AsrControlHandler implements ICmdHandler  {
                     String cmdtext = contentObject.optString("cmd_text");
                     CdAsrManager.getInstance().onCommand(cmdId, cmdKey, cmdtext);
                 } catch (JSONException var9) {
-                    LogUtil.e("AsrControlHandler", var9.getMessage().toString());
+                    LogUtil.e(TAG, var9.getMessage().toString());
                 }
             } else if (this.tool == null) {
-                LogUtil.e("AsrControlHandler", "---AsrTool is null!!!---");
+                LogUtil.e(TAG, "---AsrTool is null!!!---");
             } else if ("dialog.show".equals(param)) {
                 this.tool.onVrDialogShow();
             } else if ("dialog.dismiss".equals(param)) {

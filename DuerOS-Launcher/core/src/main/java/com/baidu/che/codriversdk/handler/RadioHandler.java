@@ -1,6 +1,7 @@
 package com.baidu.che.codriversdk.handler;
 
 import com.baidu.che.codriversdk.RequestManager.ICmdHandler;
+import com.baidu.che.codriversdk.manager.CdPrivateRadioManager;
 import com.baidu.che.codriversdk.manager.CdPrivateRadioManager.PrivateRadioModel;
 import com.baidu.che.codriversdk.manager.CdPrivateRadioManager.PrivateRadioTool;
 import com.google.gson.Gson;
@@ -16,7 +17,7 @@ public class RadioHandler implements ICmdHandler {
         if (this.tool == null) {
             return null;
         } else {
-            if ("private_radio.tool".equals(cmd) && "open".equals(param)) {
+            if (CdPrivateRadioManager.PRIVATE_RADIO_TOOL.equals(cmd) && "open".equals(param)) {
                 PrivateRadioModel model = (PrivateRadioModel)(new Gson()).fromJson(data, PrivateRadioModel.class);
                 this.tool.openPrivateRadio(model);
             }

@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CdNaviManager implements INoProguard {
+    public static final String TAG = "CdNaviManager";
     public static final String MAP_TOOL = "map.tool";
 
     public CdNaviManager() {
@@ -44,7 +45,7 @@ public class CdNaviManager implements INoProguard {
     }
 
     private void sendRequest(String param, String data) {
-        RequestManager.getInstance().sendRequest("map.tool", param, data);
+        RequestManager.getInstance().sendRequest(MAP_TOOL, param, data);
     }
 
     public static class PoiModel implements INoProguard {
@@ -68,7 +69,7 @@ public class CdNaviManager implements INoProguard {
                 var3.printStackTrace();
             }
 
-            LogUtil.d("CdNaviManager", "createParamJson result = " + params.toString());
+            LogUtil.d(TAG, "createParamJson result = " + params.toString());
             return params.toString();
         }
     }

@@ -39,7 +39,7 @@ public class PlatformService extends Service implements INoProguard {
     private boolean mIsSystemSleep = false;
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
-            LogUtil.d("PlatformService", "onServiceConnected ComponentName=" + name.getPackageName());
+            LogUtil.d(TAG, "onServiceConnected ComponentName=" + name.getPackageName());
             PlatformService.this.mCoDriverService = CoDriverServiceWrap.createCoDriverService(service);
 
             try {
@@ -51,7 +51,7 @@ public class PlatformService extends Service implements INoProguard {
         }
 
         public void onServiceDisconnected(ComponentName name) {
-            LogUtil.d("PlatformService", "onServiceDisconnected ComponentName=" + name.getPackageName());
+            LogUtil.d(TAG, "onServiceDisconnected ComponentName=" + name.getPackageName());
             PlatformService.this.mCoDriverService = null;
             PlatformService.this.mIsInitSuccess = false;
             RequestManager.getInstance().doAfterRemoteDisconnected();
@@ -62,7 +62,7 @@ public class PlatformService extends Service implements INoProguard {
         public String onCommand(String pkg, final String cmd, final String param, final String data) throws RemoteException {
             PlatformService.this.mMainHandler.post(new Runnable() {
                 public void run() {
-                    LogUtil.d("PlatformService", "onCommand cmd=" + cmd + " param=" + param);
+                    LogUtil.d(TAG, "onCommand cmd=" + cmd + " param=" + param);
                     PlatformService.this.dispatch(cmd, param, data);
                 }
             });
@@ -74,13 +74,13 @@ public class PlatformService extends Service implements INoProguard {
     }
 
     public IBinder onBind(Intent intent) {
-        LogUtil.d("PlatformService", "onBind");
+        LogUtil.d(TAG, "onBind");
         return this.mBinder;
     }
 
     public void onCreate() {
         super.onCreate();
-        LogUtil.d("PlatformService", "onCreate");
+        LogUtil.d(TAG, "onCreate");
         this.startForeground(8888, new Notification());
         this.init();
         this.reConnect();
@@ -110,7 +110,7 @@ public class PlatformService extends Service implements INoProguard {
     }
 
     private void connect() {
-        LogUtil.d("PlatformService", "connect to codriver");
+        LogUtil.d(TAG, "connect to codriver");
         Intent startIntent = new Intent("com.baidu.che.codriver.StartService");
         ComponentName componentName = new ComponentName("com.baidu.che.codriver", "com.baidu.che.codriver.sdk.CoDriverService");
         startIntent.setComponent(componentName);
@@ -121,7 +121,7 @@ public class PlatformService extends Service implements INoProguard {
     private void reConnect() {
         if (this.mCoDriverService == null) {
             if (!this.mIsSystemSleep) {
-                LogUtil.d("PlatformService", "reConnect");
+                LogUtil.d(TAG, "reConnect");
                 this.connect();
             }
 
@@ -132,7 +132,7 @@ public class PlatformService extends Service implements INoProguard {
 
     public void onDestroy() {
         super.onDestroy();
-        LogUtil.d("PlatformService", "onDestroy");
+        LogUtil.d(TAG, "onDestroy");
         this.mMainHandler.removeMessages(101);
     }
 
@@ -153,7 +153,7 @@ public class PlatformService extends Service implements INoProguard {
     }
 
     void sendRequest(final String cmd, final String param, final String data) {
-        LogUtil.d("PlatformService", "sendRequest " + cmd + " " + param);
+        LogUtil.d(TAG, "sendRequest " + cmd + " " + param);
         if (this.mCoDriverService != null) {
             this.mWorkHandler.post(new Runnable() {
                 public void run() {

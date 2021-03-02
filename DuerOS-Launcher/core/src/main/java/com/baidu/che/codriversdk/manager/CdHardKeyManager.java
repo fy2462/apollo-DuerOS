@@ -20,12 +20,12 @@ public class CdHardKeyManager implements INoProguard {
     }
 
     public void setHardKeyTool(CdHardKeyManager.HardKeyTool tool) {
-        RequestManager.getInstance().sendRequest("hardkey.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("hardkey.tool", new HardKeyHandler(tool));
+        RequestManager.getInstance().sendRequest(HARDKEY_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(HARDKEY_TOOL, new HardKeyHandler(tool));
     }
 
     public void sendHardKeyRequest(String param, String data) {
-        RequestManager.getInstance().sendRequest("hardkey.tool", param, data);
+        RequestManager.getInstance().sendRequest(HARDKEY_TOOL, param, data);
     }
 
     public interface HardKeyTool extends INoProguard {

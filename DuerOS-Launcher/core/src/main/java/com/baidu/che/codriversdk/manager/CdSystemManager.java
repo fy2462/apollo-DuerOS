@@ -32,7 +32,7 @@ public class CdSystemManager implements INoProguard {
 
     private CdSystemManager() {
         this.mSystemCommandHandler = new SystemCommandHandler();
-        RequestManager.getInstance().addCommandHandler("system.tool", this.mSystemCommandHandler);
+        RequestManager.getInstance().addCommandHandler(CdSystemManager.SYSTEM_TOOL, this.mSystemCommandHandler);
     }
 
     private static class CdSystemManagerHolder {
@@ -44,12 +44,12 @@ public class CdSystemManager implements INoProguard {
     }
 
     public void setSystemTool(CdSystemManager.SystemTool tool) {
-        RequestManager.getInstance().sendRequest("system.tool", "set", (String)null);
+        RequestManager.getInstance().sendRequest(CdSystemManager.SYSTEM_TOOL, "set", (String)null);
         this.mSystemCommandHandler.setSystemTool(tool);
     }
 
     public void setRecorderTool(CdSystemManager.DrivingRecorderTool drivingRecorderTool) {
-        RequestManager.getInstance().sendRequest("system.tool", "set", (String)null);
+        RequestManager.getInstance().sendRequest(CdSystemManager.SYSTEM_TOOL, "set", (String)null);
         this.mSystemCommandHandler.setDrivingRecorderTool(drivingRecorderTool);
     }
 

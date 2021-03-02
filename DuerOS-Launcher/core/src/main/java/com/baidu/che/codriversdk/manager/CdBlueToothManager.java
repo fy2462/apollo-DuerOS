@@ -19,8 +19,8 @@ public class CdBlueToothManager implements INoProguard {
     private CdBlueToothManager() { }
 
     public void setBlueToothTool(CdBlueToothManager.BlueToothTool tool) {
-        RequestManager.getInstance().sendRequest("bt.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("bt.tool", new BlueToothHandler(tool));
+        RequestManager.getInstance().sendRequest(BT_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(BT_TOOL, new BlueToothHandler(tool));
     }
 
     public void onNotifyBTStatus(CdBlueToothManager.BtStatus status) {
@@ -44,7 +44,7 @@ public class CdBlueToothManager implements INoProguard {
     }
 
     public void sendRequest(String param, String data) {
-        RequestManager.getInstance().sendRequest("bt.tool", param, data);
+        RequestManager.getInstance().sendRequest(BT_TOOL, param, data);
     }
 
     public static enum BTPhoneStatus implements INoProguard {

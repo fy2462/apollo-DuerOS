@@ -10,6 +10,9 @@ import com.baidu.che.codriversdk.RequestManager;
 import com.baidu.che.codriversdk.handler.TestHandler;
 
 public class CdTestManager implements INoProguard {
+
+    public static final String TEST_TOOL = "test.tool";
+
     public CdTestManager() {
     }
 
@@ -22,8 +25,8 @@ public class CdTestManager implements INoProguard {
     }
 
     public void setTestTool(CdTestManager.TestTool tool) {
-        RequestManager.getInstance().sendRequest("test.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("test.tool", new TestHandler(tool));
+        RequestManager.getInstance().sendRequest(TEST_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(TEST_TOOL, new TestHandler(tool));
     }
 
     public interface TestTool extends INoProguard {

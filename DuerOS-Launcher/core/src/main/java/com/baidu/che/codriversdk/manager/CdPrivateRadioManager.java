@@ -11,6 +11,10 @@ import com.baidu.che.codriversdk.handler.RadioHandler;
 import java.util.List;
 
 public class CdPrivateRadioManager implements INoProguard {
+
+    public static final String TAG = "CdPrivateRadioManager";
+    public static final String PRIVATE_RADIO_TOOL = "private_radio.tool";
+
     public CdPrivateRadioManager() {
     }
 
@@ -23,8 +27,8 @@ public class CdPrivateRadioManager implements INoProguard {
     }
 
     public void setPrivateRadioTool(CdPrivateRadioManager.PrivateRadioTool tool) {
-        RequestManager.getInstance().sendRequest("private_radio.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("private_radio.tool", new RadioHandler(tool));
+        RequestManager.getInstance().sendRequest(PRIVATE_RADIO_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(PRIVATE_RADIO_TOOL, new RadioHandler(tool));
     }
 
     public static class PrivateRadioModel implements INoProguard {

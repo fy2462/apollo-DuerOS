@@ -6,6 +6,9 @@ import com.baidu.che.codriversdk.handler.MusicCommandHandler;
 import java.util.List;
 
 public class CdMusicManager implements INoProguard {
+
+    public static final String MUSIC_TOOL = "music.tool";
+
     public CdMusicManager() {
     }
 
@@ -18,12 +21,12 @@ public class CdMusicManager implements INoProguard {
     }
 
     public void setMusicTool(CdMusicManager.MusicTool tool) {
-        RequestManager.getInstance().sendRequest("music.tool", "set", (String)null);
-        RequestManager.getInstance().addCommandHandler("music.tool", new MusicCommandHandler(tool));
+        RequestManager.getInstance().sendRequest(MUSIC_TOOL, "set", (String)null);
+        RequestManager.getInstance().addCommandHandler(MUSIC_TOOL, new MusicCommandHandler(tool));
     }
 
     public void sendRequest(String param, String data) {
-        RequestManager.getInstance().sendRequest("music.tool", param, data);
+        RequestManager.getInstance().sendRequest(MUSIC_TOOL, param, data);
     }
 
     public static class MusicModel implements INoProguard {
